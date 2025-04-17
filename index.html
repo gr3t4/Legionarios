@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página Cultural</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Arial&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="noise"></canvas>
+  <nav class="navbar">
+    <div class="logo">
+      <a href="#"><img src="https://via.placeholder.com/100x50/FFD700/000000?text=Logo" alt="Logo Cultural" class="logo-img"></a>
+    </div>
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="#conocenos">Conócenos</a>
+        <div class="dropdown">
+          <a href="#quienes-somos">Quiénes Somos</a>
+          <a href="#mision-vision">Misión y Visión</a>
+          <a href="#historia">Nuestra Historia</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a href="#disciplinas">Disciplinas Artísticas</a>
+        <div class="dropdown">
+          <a href="#pintura">Pintura</a>
+          <a href="#musica">Música</a>
+          <a href="#danza">Danza</a>
+          <a href="#teatro">Teatro</a>
+          <a href="#escultura">Escultura</a>
+          <a href="#fotografia">Fotografía</a>
+          <a href="#literatura">Literatura</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a href="#eventos">Eventos</a>
+      </li>
+      <li class="nav-item">
+        <a href="#tienda">Tienda</a>
+        <div class="dropdown">
+          <a href="#pinturas">Pinturas</a>
+          <a href="#esculturas">Esculturas</a>
+          <a href="#libros">Libros</a>
+          <a href="#fotografias">Fotografías</a>
+          <a href="#artesanias">Artesanías</a>
+          <a href="#joyeria">Joyería</a>
+          <a href="#musica">Música</a>
+        </div>
+      </li>
+    </ul>
+  </nav>
+
+  <div id="conocenos" class="section">
+    <h1>Conócenos</h1>
+    <p>Descubre quiénes somos, nuestra misión y visión, y la historia que nos ha llevado a ser un referente en el mundo cultural.</p>
+  </div>
+
+  <div id="disciplinas" class="section">
+    <h1>Disciplinas Artísticas</h1>
+    <p>Explora las diversas disciplinas artísticas que promovemos, desde pintura hasta literatura, cada una con su esencia única.</p>
+  </div>
+
+  <div id="eventos" class="section">
+    <h1>Eventos</h1>
+    <p>Mantente al tanto de nuestros eventos culturales, exposiciones, presentaciones y talleres que enriquecen la comunidad.</p>
+  </div>
+
+  <div id="tienda" class="section">
+    <h1>Tienda</h1>
+    <p>Adquiere piezas únicas en nuestra tienda, desde obras de arte hasta artesanías y joyería creada por talentosos artistas.</p>
+  </div>
+
+  <footer>
+    <div class="social-links">
+      <a href="https://facebook.com" target="_blank">Facebook</a>
+      <a href="https://instagram.com" target="_blank">Instagram</a>
+      <a href="https://twitter.com" target="_blank">Twitter</a>
+      <a href="https://youtube.com" target="_blank">YouTube</a>
+    </div>
+  </footer>
+
+  <script>
+    // Noise texture for background
+    const canvas = document.getElementById('noise');
+    const ctx = canvas.getContext('2d');
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    function drawNoise() {
+      const imgData = ctx.createImageData(canvas.width, canvas.height);
+      for (let i = 0; i < imgData.data.length; i += 4) {
+        const value = Math.random() * 255;
+        imgData.data[i] = value;
+        imgData.data[i + 1] = value;
+        imgData.data[i + 2] = value;
+        imgData.data[i + 3] = 255;
+      }
+      ctx.putImageData(imgData, 0, 0);
+    }
+    setInterval(drawNoise, 100);
+
+    // Particle effect for gold dust
+    const particleCanvas = document.createElement('canvas');
+    particleCanvas.style.position = 'fixed';
+    particleCanvas.style.top = '0';
+    particleCanvas.style.left = '0';
+    particleCanvas.style.pointerEvents = 'none';
+    particleCanvas.style.zIndex = '-1';
+    document.body.appendChild(particleCanvas);
+    const pCtx = particleCanvas.getContext('2d');
+    function resizeParticleCanvas() {
+      particleCanvas.width = window.innerWidth;
+      particleCanvas.height = window.innerHeight;
+    }
+    resizeParticleCanvas();
+    window.addEventListener('resize', resizeParticleCanvas);
+    const particles = [];
+    class Particle {
+      constructor() {
+        this.x = Math.random() * particleCanvas.width;
+        this.y = Math.random() * particleCanvas.height;
+        this.size = Math.random() * 2 + 1;
+        this.speedX = Math.random() * 0.5 - 0.25;
+        this.speedY = Math.random() * 0.5 - 0.25;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0 || this.x > particleCanvas.width) this.speedX *= -1;
+        if (this.y < 0 || this.y > particleCanvas.height) this.speedY *= -1;
+      }
+      draw() {
+        pCtx.fillStyle = 'rgba(255, 215, 0, 0.5)';
+        pCtx.beginPath();
+        pCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        pCtx.fill();
+      }
+    }
+    for (let i = 0; i < 50; i++) {
+      particles.push(new Particle());
+    }
+    function animateParticles() {
+      pCtx.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    // Fade-in sections on scroll
+    const sections = document.querySelectorAll('.section');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+    sections.forEach(section => observer.observe(section));
+  </script>
+</body>
+</html>
