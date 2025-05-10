@@ -1,169 +1,322 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Página Cultural</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Arial&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Colectivo ArteVivo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Playfair Display', serif;
+      background-color: #111;
+      color: #FFD700;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+
+    header {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+.imagen-header {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-width: 100%;
+}
+
+/* Para celulares: usar altura automática */
+@media (max-width: 600px) {
+  .header-imagen {
+    height: auto;
+    aspect-ratio: 16/9;
+  }
+}
+
+
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      background-color: #000;
+      padding: 0.5rem;
+    }
+
+    nav a {
+      color: #FFD700;
+      text-decoration: none;
+      margin: 0.5rem 1rem;
+      font-size: 1.2rem;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #fff;
+    }
+
+    section {
+      padding: 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .disciplinas {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .disciplina {
+      background-color: #1a1a1a;
+      border: 2px solid #FFD700;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #FFD70088;
+      text-align: center;
+    }
+
+    .galeria {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .galeria img {
+      width: 100%;
+      border: 2px solid #FFD700;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #FFD70088;
+      transition: transform 0.3s;
+    }
+
+    .galeria img:hover {
+      transform: scale(1.05);
+    }
+
+    .tienda {
+      background: url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
+      background-size: cover;
+      border-left: 5px solid #FFD700;
+      padding: 2rem;
+      margin-top: 2rem;
+    }
+
+    footer .redes {
+  margin-top: 1rem;
+}
+
+footer .redes a {
+  color: #FFD700;
+  margin: 0 10px;
+  font-size: 1.5rem;
+  transition: color 0.3s, transform 0.3s;
+}
+
+footer .redes a:hover {
+  color: #fff;
+  transform: scale(1.2);
+}
+
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.8rem;
+      }
+
+      nav a {
+        font-size: 1rem;
+      }
+    }
+
+    nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #111;
+}
+
+nav a {
+  color: #FFD700;
+  text-decoration: none;
+  padding: 10px 15px;
+  font-weight: bold;
+  font-family: 'Playfair Display', serif;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: #ffffff;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #111;
+  border: 1px solid #FFD700;
+  border-radius: 10px;
+  min-width: 200px;
+  z-index: 1000;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 10px 15px;
+  color: #FFD700;
+}
+
+.dropdown-content a:hover {
+  background-color: #222;
+  color: #fff;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Estilo para el logo */
+nav .logo {
+  flex-shrink: 0;
+}
+
+nav .logo img {
+  height: 50px; /* Ajusta el tamaño según sea necesario */
+  width: auto;
+}
+
+/* Opcional: si deseas centrar los elementos */
+@media screen and (max-width: 768px) {
+  nav {
+    justify-content: center;
+  }
+  .logo {
+    order: -1; /* Mueve el logo a la izquierda */
+  }
+}
+
+
+  </style>
 </head>
 <body>
-  <canvas id="noise"></canvas>
-  <nav class="navbar">
+    <header class="header-imagen">
+      <img src="fondoP.PNG" alt="Imagen de encabezado" class="imagen-header">
+      </header>
+      
+
+  <nav>
     <div class="logo">
-      <a href="#"><img src="https://via.placeholder.com/100x50/FFD700/000000?text=Logo" alt="Logo Cultural" class="logo-img"></a>
+        <a href="#"><img src="logo.png" alt="Logo del colectivo"></a>
     </div>
-    <ul class="nav-list">
-      <li class="nav-item">
-        <a href="#conocenos">Conócenos</a>
-        <div class="dropdown">
-          <a href="#quienes-somos">Quiénes Somos</a>
-          <a href="#mision-vision">Misión y Visión</a>
-          <a href="#historia">Nuestra Historia</a>
+    <a href="#nosotros">¿Que hacemos?</a>
+    <div class="dropdown">
+        <a href="#disciplinas" class="dropbtn">Disciplinas <i class="fas fa-chevron-down"></i></a>
+        <div class="dropdown-content">
+            <a href="#">Dibujo artístico</a>
+            <a href="#">Pintura en óleo</a>
+            <a href="#">Acuarela</a>
+            <a href="#">Arte digital</a>
+            <a href="#">Escultura</a>
+            <a href="#">Grabado</a>
+            <a href="#">Graffiti</a>
+            <a href="#">Fotografía artística</a>
+            <a href="#">Ilustración</a>
         </div>
-      </li>
-      <li class="nav-item">
-        <a href="#disciplinas">Disciplinas Artísticas</a>
-        <div class="dropdown">
-          <a href="#pintura">Pintura</a>
-          <a href="#musica">Música</a>
-          <a href="#danza">Danza</a>
-          <a href="#teatro">Teatro</a>
-          <a href="#escultura">Escultura</a>
-          <a href="#fotografia">Fotografía</a>
-          <a href="#literatura">Literatura</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a href="#eventos">Eventos</a>
-      </li>
-      <li class="nav-item">
-        <a href="#tienda">Tienda</a>
-        <div class="dropdown">
-          <a href="#pinturas">Pinturas</a>
-          <a href="#esculturas">Esculturas</a>
-          <a href="#libros">Libros</a>
-          <a href="#fotografias">Fotografías</a>
-          <a href="#artesanias">Artesanías</a>
-          <a href="#joyeria">Joyería</a>
-          <a href="#musica">Música</a>
-        </div>
-      </li>
-    </ul>
-  </nav>
+    </div>
+    <a href="#galeria">Galería</a>
+    <a href="#tienda">Tienda</a>
+</nav>
 
-  <div id="conocenos" class="section">
-    <h1>Conócenos</h1>
-    <p>Descubre quiénes somos, nuestra misión y visión, y la historia que nos ha llevado a ser un referente en el mundo cultural.</p>
-  </div>
 
-  <div id="disciplinas" class="section">
-    <h1>Disciplinas Artísticas</h1>
-    <p>Explora las diversas disciplinas artísticas que promovemos, desde pintura hasta literatura, cada una con su esencia única.</p>
-  </div>
 
-  <div id="eventos" class="section">
-    <h1>Eventos</h1>
-    <p>Mantente al tanto de nuestros eventos culturales, exposiciones, presentaciones y talleres que enriquecen la comunidad.</p>
-  </div>
+  <section id="nosotros">
+    <h2>¿Que hacemos?</h2>
+    <p>Nuestro colectivo se dedica a una amplia gama de actividades que fomenta la creatividad y la cultura en Tulancingo.</p>
+  </section>
+  <section id="nosotros">
+    <h2>Quienes somos?</h2>
+    <p> Los legionarios del arte somos un colectivo de artistas comprometidos con la creacion y difusíon cultural en Tulancingo de Bravo.</p>
+    <p>Nos une el deseo de generar un impacto positivo en nuestra comunidad a traves de diversas manifestaciones artisticas.</p>
+    <p>Desde la pintura, la escultura, la musica, la danza, hasta las artes visuales y perfomaticas, buscamos que el arte sea una herramienta poderosa para sensibilizar, inspirar y transformar. </p>
+  </section>
 
-  <div id="tienda" class="section">
-    <h1>Tienda</h1>
-    <p>Adquiere piezas únicas en nuestra tienda, desde obras de arte hasta artesanías y joyería creada por talentosos artistas.</p>
-  </div>
+  <section id="disciplinas">
+    <h2>Disciplinas</h2>
+    <div class="disciplinas">
+      <div class="disciplina">Danza Contemporánea</div>
+      <div class="disciplina">Teatro Experimental</div>
+      <div class="disciplina">Música Fusión</div>
+      <div class="disciplina">Pintura Abstracta</div>
+      <div class="disciplina">Fotografía Urbana</div>
+      <div class="disciplina">Arte Digital</div>
+      <div class="disciplina">Cine Independiente</div>
+      <div class="disciplina">Performance</div>
+      <div class="disciplina">Literatura Creativa</div>
+    </div>
+  </section>
+  <section id="galeria">
+    <h2>Galería Artística</h2>
+    <div class="galeria">
+      <img src="https://cdn.pixabay.com/photo/2017/06/20/19/22/paint-2427646_640.jpg" alt="Obra 1">
+      <img src="https://cdn.pixabay.com/photo/2017/08/01/08/29/paint-2563977_640.jpg" alt="Obra 2">
+      <img src="https://cdn.pixabay.com/photo/2016/11/29/04/17/paint-1868569_640.jpg" alt="Obra 3">
+      <img src="https://cdn.pixabay.com/photo/2018/08/14/13/23/girl-3604385_640.jpg" alt="Obra 4">
+      <img src="https://cdn.pixabay.com/photo/2015/09/17/17/19/graffiti-942234_640.jpg" alt="Obra 5">
+      <img src="https://cdn.pixabay.com/photo/2018/01/09/23/49/street-art-3070804_640.jpg" alt="Obra 6">
+      <img src="https://cdn.pixabay.com/photo/2020/02/07/10/46/street-art-4826236_640.jpg" alt="Obra 7">
+      <img src="https://cdn.pixabay.com/photo/2018/03/10/15/01/abstract-3219843_640.jpg" alt="Obra 8">
+      <img src="https://cdn.pixabay.com/photo/2021/09/04/08/47/digital-art-6596791_640.jpg" alt="Obra 9">
+      <img src="https://cdn.pixabay.com/photo/2019/11/11/15/58/digital-painting-4617756_640.jpg" alt="Obra 10">
+      <img src="https://cdn.pixabay.com/photo/2016/11/29/09/15/art-1869204_640.jpg" alt="Obra 11">
+      <img src="https://cdn.pixabay.com/photo/2018/03/11/17/42/woman-3219525_640.jpg" alt="Obra 12">
+      <img src="https://cdn.pixabay.com/photo/2018/04/28/12/29/woman-3357171_640.jpg" alt="Obra 13">
+      <img src="https://cdn.pixabay.com/photo/2021/02/09/07/13/fantasy-5996249_640.jpg" alt="Obra 14">
+      <img src="https://cdn.pixabay.com/photo/2019/05/13/15/40/fantasy-4199051_640.jpg" alt="Obra 15">
+      <img src="https://cdn.pixabay.com/photo/2019/11/02/09/12/art-4595412_640.jpg" alt="Obra 16">
+    </div>
+  </section>
+  
+  <section id="galeria">
+    <h2>Galería</h2>
+    <div class="galeria">
+      <img src="https://cdn.pixabay.com/photo/2017/06/20/19/22/paint-2427646_1280.jpg" alt="Obra 1">
+      <img src="https://cdn.pixabay.com/photo/2017/08/01/08/29/paint-2563977_1280.jpg" alt="Obra 2">
+      <img src="https://cdn.pixabay.com/photo/2016/11/29/04/17/paint-1868569_1280.jpg" alt="Obra 3">
+      <img src="https://cdn.pixabay.com/photo/2017/06/20/19/22/paint-2427646_1280.jpg" alt="Obra 4">
+    </div>
+  </section>
+
+  <section id="tienda" class="tienda">
+    <h2>Tienda</h2>
+    <p>Visita nuestra tienda donde encontrarás obras originales, ropa personalizada y más artículos con esencia única del colectivo.</p>
+  </section>
 
   <footer>
-    <div class="social-links">
-      <a href="https://facebook.com" target="_blank">Facebook</a>
-      <a href="https://instagram.com" target="_blank">Instagram</a>
-      <a href="https://twitter.com" target="_blank">Twitter</a>
-      <a href="https://youtube.com" target="_blank">YouTube</a>
+    <p>&copy; 2025 Colectivo ArteVivo - Todos los derechos reservados</p>
+    <div class="redes">
+      <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+      <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
     </div>
   </footer>
-
-  <script>
-    // Noise texture for background
-    const canvas = document.getElementById('noise');
-    const ctx = canvas.getContext('2d');
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-    function drawNoise() {
-      const imgData = ctx.createImageData(canvas.width, canvas.height);
-      for (let i = 0; i < imgData.data.length; i += 4) {
-        const value = Math.random() * 255;
-        imgData.data[i] = value;
-        imgData.data[i + 1] = value;
-        imgData.data[i + 2] = value;
-        imgData.data[i + 3] = 255;
-      }
-      ctx.putImageData(imgData, 0, 0);
-    }
-    setInterval(drawNoise, 100);
-
-    // Particle effect for gold dust
-    const particleCanvas = document.createElement('canvas');
-    particleCanvas.style.position = 'fixed';
-    particleCanvas.style.top = '0';
-    particleCanvas.style.left = '0';
-    particleCanvas.style.pointerEvents = 'none';
-    particleCanvas.style.zIndex = '-1';
-    document.body.appendChild(particleCanvas);
-    const pCtx = particleCanvas.getContext('2d');
-    function resizeParticleCanvas() {
-      particleCanvas.width = window.innerWidth;
-      particleCanvas.height = window.innerHeight;
-    }
-    resizeParticleCanvas();
-    window.addEventListener('resize', resizeParticleCanvas);
-    const particles = [];
-    class Particle {
-      constructor() {
-        this.x = Math.random() * particleCanvas.width;
-        this.y = Math.random() * particleCanvas.height;
-        this.size = Math.random() * 2 + 1;
-        this.speedX = Math.random() * 0.5 - 0.25;
-        this.speedY = Math.random() * 0.5 - 0.25;
-      }
-      update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        if (this.x < 0 || this.x > particleCanvas.width) this.speedX *= -1;
-        if (this.y < 0 || this.y > particleCanvas.height) this.speedY *= -1;
-      }
-      draw() {
-        pCtx.fillStyle = 'rgba(255, 215, 0, 0.5)';
-        pCtx.beginPath();
-        pCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        pCtx.fill();
-      }
-    }
-    for (let i = 0; i < 50; i++) {
-      particles.push(new Particle());
-    }
-    function animateParticles() {
-      pCtx.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
-      particles.forEach(p => {
-        p.update();
-        p.draw();
-      });
-      requestAnimationFrame(animateParticles);
-    }
-    animateParticles();
-
-    // Fade-in sections on scroll
-    const sections = document.querySelectorAll('.section');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1 });
-    sections.forEach(section => observer.observe(section));
-  </script>
 </body>
 </html>
